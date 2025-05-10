@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sneakers Evolution | Історія снікерс індустрії</title>
+    <style>
+        :root {
+            --primary: #ff4d00;
+            --secondary: #2d3142;
+            --light: #f5f5f5;
+            --dark: #1a1a1a;
+            --accent: #00c2ff;
+            --text: #333333;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 70px;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--accent);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header styling */
+        header {
+            background-color: var(--secondary);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: var(--light);
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero section styling */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/api/placeholder/1200/800') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--light);
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.3s forwards;
+            opacity: 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            animation: fadeInUp 1s ease 0.6s forwards;
+            opacity: 0;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+        
+        /* Sections styling */
+        section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        /* Timeline styling */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--secondary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+        
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: -10px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            transform: rotate(45deg);
+            box-shadow: 5px -5px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -10px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            transform: rotate(45deg);
+            box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -12px;
+            background-color: var(--primary);
+            border: 4px solid var(--secondary);
+            top: 20px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -13px;
+        }
+        
+        .timeline-date {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-title {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            color: var(--secondary);
+        }
+        
+        .timeline-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        
+        /* Brands section styling */
+        .brands {
+            background-color: var(--secondary);
+            color: var(--light);
+        }
+        
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .brand-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .brand-card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .brand-logo {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .brand-name {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Icons styling */
+        .iconic-sneakers {
+            background-color: var(--light);
+        }
+        
+        .sneaker-cards {
+            display: flex;
+            gap: 30px;
+            width: 100%;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+        }
+        
+        .sneaker-card {
+            flex: 0 0 300px;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            scroll-snap-align: start;
+        }
+        
+        .sneaker-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .sneaker-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .sneaker-info {
+            padding: 20px;
+        }
+        
+        .sneaker-name {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+        
+        .sneaker-year {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        /* Culture section styling */
+        .culture {
+            background-color: #f0f0f0;
+        }
+        
+        .culture-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .culture-img {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .culture-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .culture-img:hover img {
+            transform: scale(1.05);
+        }
+        
+        .culture-text h3 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .culture-text p {
+            margin-bottom: 20px;
+        }
+        
+        /* Future section styling */
+        .future {
+            background: linear-gradient(135deg, var(--secondary), #1a1a2e);
+            color: var(--light);
+        }
+        
+        .future-container {
+            text-align: center;
+        }
+        
+        .future h2 {
+            color: var(--light);
+        }
+        
+        .future h2::after {
+            background-color: var(--accent);
+        }
+        
+        .innovations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .innovation-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            transition: var(--transition);
+        }
+        
+        .innovation-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-10px);
+        }
+        
+        .innovation-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        .innovation-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Gallery styling */
+        .gallery {
+            background-color: var(--light);
+        }
+        
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .gallery-caption {
+            color: white;
+            font-size: 1.1rem;
+        }
+        
+        /* Contact section styling */
+        .contact {
+            background-color: var(--secondary);
+            color: var(--light);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            margin-right: 15px;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .contact-form h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            font-size: 1rem;
+        }
+        
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        /* Footer styling */
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            margin: 0 15px;
+            color: var(--light);
+            font-size: 1.2rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-text {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow: auto;
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            color: var(--secondary);
+            transform: rotate(90deg);
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+
+        /* Pre-loader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--secondary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .preloader.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loader {
+            width: 70px;
+            height: 70px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Responsive styling */
+        @media (max-width: 991px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item::after {
+                left: 18px;
+                top: 20px;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content::after,
+            .timeline-item:nth-child(even) .timeline-content::after {
+                left: -10px;
+                top: 20px;
+                right: auto;
+            }
+            
+            .culture-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 10px 20px;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--secondary);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav.open ul {
+                transform: translateY(0);
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .timeline-item {
+                padding-left: 60px;
+            }
+            
+            .gallery-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                SNEAKERS<span>Evolution</span>
+            </div>
+            <button class="mobile-toggle">☰</button>
+            <nav>
+                <ul>
+                    <li><a href="#home">Головна</a></li>
+                    <li><a href="#history">Історія</a></li>
+                    <li><a href="#brands">Бренди</a></li>
+                    <li><a href="#icons">Ікони</a></li>
+                    <li><a href="#culture">Культура</a></li>
+                    <li><a href="#future">Майбутнє</a></li>
+                    <li><a href="#gallery">Галерея</a></li>
+                    <li><a href="#contact">Контакт</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Еволюція Снікерів</h1>
+            <p>Від спортивного взуття до культурного феномену: подорож історією снікерів та їх вплив на світову моду і культуру</p>
+            <a href="#history" class="btn">Дізнатися більше</a>
+        </div>
+        <div class="scroll-down">⮯</div>
+    </section>
+
+    <!-- History Timeline Section -->
+    <section id="history">
+        <div class="container">
+            <div class="section-title">
+                <h2>Історія снікерів</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">1860-ті роки</div>
+                        <h3 class="timeline-title">Поява перших гумових підошв</h3>
+                        <img src="/api/placeholder/400/200" alt="Перші гумові підошви" class="timeline-img">
+                        <p>Компанія U.S. Rubber Company створює перше взуття з гумовою підошвою, яке пізніше буде називатися "сникерси". Назва походить від англійського дієслова "to sneak" (прокрадатися), оскільки взуття дозволяло безшумно ходити.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">1971 рік</div>
+                        <h3 class="timeline-title">Створення лого Nike "Swoosh"</h3>
+                        <img src="/api/placeholder/400/200" alt="Nike Swoosh логотип" class="timeline-img">
+                        <p>Дизайнерка Керолін Девідсон створює знаменитий логотип Nike "Swoosh" за $35. Цей логотип стає одним з найпізнаваніших брендових символів у світі.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">1984 рік</div>
+                        <h3 class="timeline-title">Air Jordan I</h3>
+                        <img src="/api/placeholder/400/200" alt="Air Jordan I" class="timeline-img">
+                        <p>Nike підписує контракт з новачком NBA Майклом Джорданом і випускає перші кросівки Air Jordan. Вони порушували правила НБА щодо кольору взуття, за що Джорданом доводилося платити штрафи $5,000 за кожну гру.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">1986 рік</div>
+                        <h3 class="timeline-title">Run-DMC і "My Adidas"</h3>
+                        <img src="/api/placeholder/400/200" alt="Run-DMC з Adidas" class="timeline-img">
+                        <p>Хіп-хоп гурт Run-DMC випускає пісню "My Adidas", що підкреслює зв'язок між снікер-культурою та хіп-хопом. Це приводить до підписання контракту на $1 мільйон з Adidas — першої такої угоди між музикантами та брендом взуття.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">1990-ті роки</div>
+                        <h3 class="timeline-title">Розквіт снікер-культури</h3>
+                        <img src="/api/placeholder/400/200" alt="Снікер-культура 90-х" class="timeline-img">
+                        <p>Снікери стають невід'ємною частиною молодіжної культури. З'являються перші колекціонери кросівок, а рідкісні моделі починають продаватися за високими цінами.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2000-ні роки</div>
+                        <h3 class="timeline-title">Колаборації стають мейнстрімом</h3>
+                        <img src="/api/placeholder/400/200" alt="Колаборації брендів" class="timeline-img">
+                        <p>Бренди починають активно співпрацювати з дизайнерами, знаменитостями та художниками. Nike співпрацює з японським дизайнером Хіроші Фуджіварою, стиліст Найкіл доповнює лінію Adidas власними моделями.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2015 рік</div>
+                        <h3 class="timeline-title">Yeezy Boost</h3>
+                        <img src="/api/placeholder/400/200" alt="Adidas Yeezy Boost" class="timeline-img">
+                        <p>Репер Каньє Вест випускає Adidas Yeezy Boost, що кардинально змінює ринок обмежених моделей і перепродажу кросівок. Моделі розпродаються за хвилини і перепродаються за цінами, які в кілька разів перевищують роздрібні.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020-ті роки</div>
+                        <h3 class="timeline-title">Екологічність і цифрові технології</h3>
+                        <img src="/api/placeholder/400/200" alt="Екологічні кросівки" class="timeline-img">
+                        <p>Бренди звертаються до екологічно чистих матеріалів і стійких методів виробництва. Adidas випускає взуття з переробленого океанічного пластику, а технології 3D-друку дозволяють створювати індивідуалізовані кросівки.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands Section -->
+    <section id="brands" class="brands">
+        <div class="container">
+            <div class="section-title">
+                <h2>Легендарні бренди</h2>
+            </div>
+            <div class="brands-grid">
+                <div class="brand-card">
+                    <div class="brand-logo">
+                        <img src="/api/placeholder/100/100" alt="Nike Logo">
+                    </div>
+                    <h3 class="brand-name">Nike</h3>
+                    <p>Заснований в 1964 році як Blue Ribbon Sports, Nike став найбільшим виробником спортивного взуття у світі. Революційні технології, як Air і Flyknit, та маркетингові кампанії з зірковими спортсменами забезпечили успіх бренду.</p>
+                </div>
+                
+                <div class="brand-card">
+                    <div class="brand-logo">
+                        <img src="/api/placeholder/100/100" alt="Adidas Logo">
+                    </div>
+                    <h3 class="brand-name">Adidas</h3>
+                    <p>Заснований Аді Дасслером у 1949 році, Adidas є одним з найстаріших і найвпливовіших брендів спортивного взуття. Характерні три смуги і технології, як Boost, зробили бренд культовим у спортивному і модному світі.</p>
+                </div>
+                
+                <div class="brand-card">
+                    <div class="brand-logo">
+                        <img src="/api/placeholder/100/100" alt="Converse Logo">
+                    </div>
+                    <h3 class="brand-name">Converse</h3>
+                    <p>Заснований у 1908 році, Converse став символом молодіжної культури завдяки культовій моделі Chuck Taylor All Star. Бренд перейшов від спортивного призначення до статусу модної ікони.</p>
+                </div>
+                
+                <div class="brand-card">
+                    <div class="brand-logo">
+                        <img src="/api/placeholder/100/100" alt="Puma Logo">
+                    </div>
+                    <h3 class="brand-name">Puma</h3>
+                    <p>Заснований Рудольфом Дасслером у 1948 році після розриву з братом, Puma поєднує спортивні інновації з дизайном і модою. Колаборації з Ріанною та іншими знаменитостями зміцнили позиції бренду в fashion-індустрії.</p>
+                </div>
+                
+                <div class="brand-card">
+                    <div class="brand-logo">
+                        <img src="/api/placeholder/100/100" alt="New Balance Logo">
+                    </div>
+                    <h3 class="brand-name">New Balance</h3>
+                    <p>Заснований у 1906 році, New Balance відомий своїм зосередженням на комфорті і технічній якості. Бренд зберігає виробництво в США та Великобританії, що є рідкістю в сучасній індустрії.</p>
+                </div>
+                
+                <div class="brand-card">
+                    <div class="brand-logo">
+                        <img src="/api/placeholder/100/100" alt="Reebok Logo">
+                    </div>
+                    <h3 class="brand-name">Reebok</h3>
+                    <p>Заснований у Великобританії в 1958 році, Reebok став популярним у 1980-х роках завдяки фітнес-буму. Характерні моделі, як Pump і Classic Leather, залишаються популярними й сьогодні.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Iconic Sneakers Section -->
+    <section id="icons" class="iconic-sneakers">
+        <div class="container">
+            <div class="section-title">
+                <h2>Знакові моделі</h2>
+            </div>
+            <div class="sneaker-cards">
+                <div class="sneaker-card">
+                    <img src="/api/placeholder/300/200" alt="Air Jordan 1" class="sneaker-img">
+                    <div class="sneaker-info">
+                        <h3 class="sneaker-name">Air Jordan 1</h3>
+                        <div class="sneaker-year">1985</div>
+                        <p>Дизайн Пітера Мура для новачка НБА Майкла Джордана змінив індустрію кросівок назавжди. Ці кросівки порушували правила ліги щодо однотонного взуття і стали символом бунтарського духу.</p>
+                    </div>
+                </div>
+                
+                <div class="sneaker-card">
+                    <img src="/api/placeholder/300/200" alt="Converse Chuck Taylor All Star" class="sneaker-img">
+                    <div class="sneaker-info">
+                        <h3 class="sneaker-name">Chuck Taylor All Star</h3>
+                        <div class="sneaker-year">1917</div>
+                        <p>Найдовше вироблена модель кросівок в історії, що перейшла від баскетбольних майданчиків до музичних сцен і вулиць. Проста конструкція з полотна і гуми витримала випробування часом.</p>
+                    </div>
+                </div>
+                
+                <div class="sneaker-card">
+                    <img src="/api/placeholder/300/200" alt="Nike Air Max 1" class="sneaker-img">
+                    <div class="sneaker-info">
+                        <h3 class="sneaker-name">Nike Air Max 1</h3>
+                        <div class="sneaker-year">1987</div>
+                        <p>Революційний дизайн Тінкера Гатфілда з видимою повітряною подушкою змінив уявлення про амортизацію у кросівках. Натхненний архітектурою Центру Помпіду в Парижі.</p>
+                    </div>
+                </div>
+                
+                <div class="sneaker-card">
+                    <img src="/api/placeholder/300/200" alt="Adidas Superstar" class="sneaker-img">
+                    <div class="sneaker-info">
+                        <h3 class="sneaker-name">Adidas Superstar</h3>
+                        <div class="sneaker-year">1969</div>
+                        <p>З характерним "мушлеподібним" носком, ці кросівки перейшли з баскетбольних майданчиків до хіп-хоп культури завдяки Run-DMC. Одна з найбільш впізнаваних моделей Adidas.</p>
+                    </div>
+                </div>
+                
+                <div class="sneaker-card">
+                    <img src="/api/placeholder/300/200" alt="Puma Suede" class="sneaker-img">
+                    <div class="sneaker-info">
+                        <h3 class="sneaker-name">Puma Suede</h3>
+                        <div class="sneaker-year">1968</div>
+                        <p>Ставши символом на Олімпіаді 1968 року, коли Томмі Сміт і Джон Карлос підняли кулаки в знак протесту проти расизму. Згодом стала популярною серед брейк-дансерів за чудове зчеплення з поверхнею.</p>
+                    </div>
+                </div>
+                
+                <div class="sneaker-card">
+                    <img src="/api/placeholder/300/200" alt="Nike Air Force 1" class="sneaker-img">
+                    <div class="sneaker-info">
+                        <h3 class="sneaker-name">Nike Air Force 1</h3>
+                        <div class="sneaker-year">1982</div>
+                        <p>Перші баскетбольні кросівки з технологією Nike Air, що стали культурним феноменом в Нью-Йорку і далеко за його межами. Особливо популярна версія "White on White".</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Culture Section -->
+    <section id="culture" class="culture">
+        <div class="container">
+            <div class="section-title">
+                <h2>Культурний вплив</h2>
+            </div>
+            <div class="culture-content">
+                <div class="culture-img">
+                    <img src="/api/placeholder/500/400" alt="Sneaker Culture">
+                </div>
+                <div class="culture-text">
+                    <h3>Як кросівки змінили світ</h3>
+                    <p>Снікер-культура вийшла далеко за межі спортивного взуття. Сьогодні кросівки є символом статусу, об'єктом колекціонування та інвестицій, а також способом самовираження.</p>
+                    <p>У 1980-х роках хіп-хоп зробив кросівки центральним елементом вуличної моди. Run-DMC своєю піснею "My Adidas" підкреслили нерозривний зв'язок між музикою, культурою та взуттям.</p>
+                    <p>Фільми як "Do The Right Thing" Спайка Лі і "Back to the Future II" підняли кросівки до рівня культурних ікон, а Air Jordan стали символом споживацької культури 1990-х років.</p>
+                    <p>З появою інтернету та соціальних мереж снікери перетворилися на глобальне явище. З'явилися спеціальні медіа, форуми та маркетплейси, присвячені виключно кросівкам, а терміни як "дроп" і "коп" увійшли в повсякденну мову.</p>
+                    <p>Сьогодні ринок перепродажу кросівок оцінюється в мільярди доларів, а обмежені моделі можуть продаватися за ціною, що у десятки разів перевищує початкову вартість. Кросівки перетворилися з функціонального спортивного взуття на справжній культурний феномен.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Section -->
+    <section id="future" class="future">
+        <div class="container">
+            <div class="section-title future-container">
+                <h2>Майбутнє індустрії</h2>
+                <p>Які інновації чекають нас у світі кросівок?</p>
+            </div>
+            <div class="innovations">
+                <div class="innovation-item">
+                    <div class="innovation-icon">♻️</div>
+                    <h3 class="innovation-title">Екологічність</h3>
+                    <p>Перехід на переробку матеріалів і екологічно чисті методи виробництва. Бренди активно працюють над зменшенням вуглецевого сліду і використанням відновлюваних ресурсів.</p>
+                </div>
+                
+                <div class="innovation-item">
+                    <div class="innovation-icon">🖨️</div>
+                    <h3 class="innovation-title">3D-друк</h3>
+                    <p>Персоналізація і виготовлення на замовлення за допомогою передових технологій 3D-друку. Adidas вже використовує цю технологію для створення проміжних підошв Futurecraft 4D.</p>
+                </div>
+                
+                <div class="innovation-item">
+                    <div class="innovation-icon">🧠</div>
+                    <h3 class="innovation-title">Розумне взуття</h3>
+                    <p>Інтеграція датчиків і технологій IoT для відстеження активності, автоматичного шнурування і адаптивної амортизації. Nike вже випустила самошнуровані кросівки Adapt BB.</p>
+                </div>
+                
+                <div class="innovation-item">
+                    <div class="innovation-icon">🔄</div>
+                    <h3 class="innovation-title">Циркулярність</h3>
+                    <p>Перехід до циркулярної економіки: кросівки, які можна повністю розібрати і переробити після завершення терміну служби. Це зменшить кількість відходів у снікер-індустрії.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Галерея</h2>
+            </div>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/250" alt="Sneaker Gallery 1" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Колекція винтажних кросівок 80-х років</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/250" alt="Sneaker Gallery 2" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Процес виробництва кросівок вручну</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/250" alt="Sneaker Gallery 3" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Сучасні технології в конструкції підошви</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/250" alt="Sneaker Gallery 4" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Мистецтво кастомізації кросівок</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/250" alt="Sneaker Gallery 5" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Колекціонери та їхні рідкісні знахідки</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/250" alt="Sneaker Gallery 6" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Вплив спортивних зірок на дизайн кросівок</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/250" alt="Sneaker Gallery 7" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Вуличні стилі та снікер-культура</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/250" alt="Sneaker Gallery 8" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Інноваційні матеріали майбутнього</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Зв'яжіться з нами</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Контактна інформація</h3>
+                    <p><i>📍</i> вул. Кросівкова, 123, Київ, Україна</p>
+                    <p><i>📱</i> +380 123 456 789</p>
+                    <p><i>✉️</i> info@sneakersevolution.ua</p>
+                    <p><i>🕒</i> Пн-Пт: 9:00 - 18:00</p>
+                    <p>Зв'яжіться з нами, якщо у вас є питання про історію кросівок, або ви бажаєте поділитися цікавими фактами чи власною колекцією!</p>
+                </div>
+                <div class="contact-form">
+                    <h3>Напишіть нам</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Ваше ім'я" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Ваш email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Тема">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Ваше повідомлення" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Надіслати</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#home">Головна</a>
+                <a href="#history">Історія</a>
+                <a href="#brands">Бренди</a>
+                <a href="#icons">Ікони</a>
+                <a href="#culture">Культура</a>
+            </div>
+            <p class="footer-text">© 2025 SneakersEvolution. Усі права захищені. Сайт створений для ознайомлення з історією снікер-індустрії.</p>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="sneakerModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">⮝</div>
+
+    <!-- JavaScript -->
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.preloader').classList.add('hide');
+            }, 1000);
+        });
+
+        // Mobile menu toggle
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const nav = document.querySelector('nav');
+        
+        mobileToggle.addEventListener('click', function() {
+            nav.classList.toggle('open');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70, // Header height offset
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (nav.classList.contains('open')) {
+                        nav.classList.remove('open');
+                    }
+                }
+            });
+        });
+
+        // Scroll to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Scroll down button in hero section
+        const scrollDownButton = document.querySelector('.scroll-down');
+        
+        scrollDownButton.addEventListener('click', function() {
+            const historySection = document.querySelector('#history');
+            
+            window.scrollTo({
+                top: historySection.offsetTop - 70,
+                behavior: 'smooth'
+            });
+        });
+
+        // Timeline animation on scroll
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        function checkTimelineVisibility() {
+            timelineItems.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+                
+                if (rect.top <= windowHeight * 0.8 && rect.bottom >= 0) {
+                    item.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkTimelineVisibility);
+        window.addEventListener('load', checkTimelineVisibility);
+
+        // Sneaker modal
+        const sneakerCards = document.querySelectorAll('.sneaker-card');
+        const modal = document.getElementById('sneakerModal');
+        const modalContent = document.getElementById('modalContent');
+        const closeModal = document.querySelector('.close-modal');
+        
+        sneakerCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const name = card.querySelector('.sneaker-name').textContent;
+                const year = card.querySelector('.sneaker-year').textContent;
+                const description = card.querySelector('p').textContent;
+                const image = card.querySelector('.sneaker-img').src;
+                
+                modalContent.innerHTML = `
+                    <h2>${name}</h2>
+                    <h3>Рік: ${year}</h3>
+                    <img src="${image}" alt="${name}" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 8px; margin: 20px 0;">
+                    <p>${description}</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vestibulum quam a dolor tincidunt, vel feugiat nisi luctus. Mauris vestibulum, risus ac tincidunt facilisis, libero magna vestibulum nisi, a congue metus justo ut ex. Nullam rhoncus dolor et sagittis eleifend.</p>
+                    <p>Donec cursus consectetur nulla, at finibus justo placerat ut. Vivamus feugiat convallis neque, vel consequat mauris pulvinar non. Praesent efficitur semper tempus. Integer dignissim eros eu mauris volutpat tincidunt.</p>
+                `;
+                
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Gallery item click to show full image (ОДИН ЕКЗЕМПЛЯР ЦЬОГО БЛОКУ)
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        galleryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const imgSrc = item.querySelector('.gallery-img').src;
+                const caption = item.querySelector('.gallery-caption').textContent;
+                
+                // ВИПРАВЛЕНО: Правильна вставка змінних
+                modalContent.innerHTML = ` 
+                    <h2>${caption}</h2> 
+                    <img src="${imgSrc}" alt="${caption}" style="width: 100%; max-width: 700px; max-height: 80vh; object-fit: contain; display: block; margin: 20px auto; border-radius: 8px;">
+                `;
+                
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Contact form submission (ОДИН ЕКЗЕМПЛЯР ЦЬОГО БЛОКУ)
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Дякуємо за ваше повідомлення! В реальному проекті тут була б відправка форми.');
+            contactForm.reset();
+        });
+    </script>
+</body>
+</html>
